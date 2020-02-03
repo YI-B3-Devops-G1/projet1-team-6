@@ -6,8 +6,17 @@ executors:
       - image: postgres:alpine
       - image: redis:alpine
     environment:
-      PROJECT_NAME: project1-team-6
-  mypublisher:
+      API_PORT: 8080
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: admin
+      DB_USER: admin
+      DB_PASSWORD: admin
+      REDIS_HOST: redis
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: admin
+  publisher-environement:
     docker:
       - image: circleci/buildpack-deps:stretch
     environment:
@@ -40,7 +49,7 @@ jobs:
           command: ls ./app/
 
   build:
-    executor: mypublisher
+    executor: publisher-environement
     steps:
       - checkout
       - setup_remote_docker
@@ -56,7 +65,7 @@ jobs:
             - ./*.tar
 
   publish:
-    executor: mypublisher
+    executor: publisher-environement
     steps:
       - attach_workspace:
           at: /tmp/workspace
@@ -82,12 +91,6 @@ workflows:
           filters:
             branches:
               only: master
-      - publish:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
       - install:
           filters:
             branches:
@@ -95,6 +98,12 @@ workflows:
       - tests:
           requires:
             - install
+          filters:
+            branches:
+              only: master
+      - publish:
+          requires:
+            - tests
           filters:
             branches:
               only: master
