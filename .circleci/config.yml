@@ -33,10 +33,13 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run:
+          name: List workspace folder
+          command: ls /tmp/workspace
+      - run:
           name: Copy Node Modules Folder
           command: cp /tmp/workspace/node_modules ./app/node_modules
       - run:
-          name: List
+          name: List app folder
           command: ls ./app/
 
   build:
