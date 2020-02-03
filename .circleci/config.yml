@@ -19,7 +19,7 @@ jobs:
           paths:
             - ./app/node_modules
 
-  install:
+  tests:
     executor: mypublisher
     steps:
       - checkout
@@ -78,6 +78,16 @@ workflows:
       - publish:
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - install:
+          filters:
+            branches:
+              only: master
+      - tests:
+          requires:
+            - install
           filters:
             branches:
               only: master
