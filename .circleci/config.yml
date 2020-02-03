@@ -34,7 +34,7 @@ jobs:
           at: /tmp/workspace
       - run:
           name: Copy Node Modules Folder
-          command: cp /tmp/workspace/app/node_modules ./app/node_modules
+          command: cp -r /tmp/workspace/app/node_modules ./app/node_modules
       - run:
           name: List app folder
           command: ls ./app/
