@@ -1,5 +1,12 @@
 version: 2.1
 executors:
+  test-environement:
+    docker:
+      - image: node:lts-alpine
+      - image: postgres:alpine
+      - image: redis:alpine
+    environment:
+      PROJECT_NAME: project1-team-6
   mypublisher:
     docker:
       - image: circleci/buildpack-deps:stretch
@@ -8,7 +15,7 @@ executors:
 
 jobs:
   install:
-    executor: mypublisher
+    executor: test-environement
     steps:
       - checkout
       - run:
@@ -20,7 +27,7 @@ jobs:
             - ./app/node_modules
 
   tests:
-    executor: mypublisher
+    executor: test-environement
     steps:
       - checkout
       - attach_workspace:
