@@ -12,12 +12,15 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
+      # - run:
+      #     name: Build Docker images
+      #     command: docker-compose -f ./docker-compose.prod.yml build --compress --force-rm --no-cache --pull --parallel
+      # - run:
           name: Build Docker images
-          command: docker-compose -f ./docker-compose.prod.yml build --compress --force-rm --no-cache --pull --parallel
+          command: docker build -f Dockerfile.prod -t nodeapi .
       - run:
           name: Save Docker image
-          command: docker save -o ./${PROJECT_NAME}.tar project_nodeapi
+          command: docker save -o ./${PROJECT_NAME}.tar nodeapi
       - persist_to_workspace:
           root: .
           paths:
@@ -34,7 +37,7 @@ jobs:
           command: docker load -i /tmp/workspace/${PROJECT_NAME}.tar
       - run:
           name: Rename nodejs image
-          command: docker tag project_nodeapi ${DH_USERNAME}/${PROJECT_NAME}:latest
+          command: docker tag nodeapi ${DH_USERNAME}/${PROJECT_NAME}:latest
       - run:
           name: Login to Docker Hub
           command: docker login -u ${DH_USERNAME} --password ${DH_PASS}
