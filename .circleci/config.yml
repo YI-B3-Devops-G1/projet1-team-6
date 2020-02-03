@@ -7,6 +7,31 @@ executors:
       PROJECT_NAME: project1-team-6
 
 jobs:
+  install:
+    executor: mypublisher
+    steps:
+      - checkout
+      - run:
+          name: Install app dependencies
+          command: cd app && npm ci
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./app/node_modules
+
+  install:
+    executor: mypublisher
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Copy Node Modules Folder
+          command: cp /tmp/workspace/node_modules ./app/node_modules
+      - run:
+          name: List
+          command: ls ./app/
+
   build:
     executor: mypublisher
     steps:
