@@ -103,6 +103,7 @@ workflows:
               only: master
       - publish:
           requires:
+            - build
             - tests
           filters:
             branches:
