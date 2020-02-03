@@ -12,9 +12,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      # - run:
-      #     name: Build Docker images
-      #     command: docker-compose -f ./docker-compose.prod.yml build --compress --force-rm --no-cache --pull --parallel
       - run:
           name: Build Docker images
           command: docker build -f Dockerfile.prod -t nodeapi .
