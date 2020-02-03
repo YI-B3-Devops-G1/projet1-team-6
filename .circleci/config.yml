@@ -20,7 +20,7 @@ jobs:
           command: docker images -a
       - run:
           name: Save Docker image
-          command: docker save -o ./${PROJECT_NAME}.tar nodeapi
+          command: docker save -o ./${PROJECT_NAME}.tar project_nodeapi
       - persist_to_workspace:
           root: .
           paths:
@@ -37,7 +37,7 @@ jobs:
           command: docker load -i /tmp/workspace/${PROJECT_NAME}.tar
       # - run:
       #     name: Rename nodejs image
-      #     command: docker tag nodeapi ${DH_USERNAME}/${PROJECT_NAME}:latest
+      #     command: docker tag project_nodeapi ${DH_USERNAME}/${PROJECT_NAME}:latest
       # - run:
       #     name: Login to Docker Hub
       #     command: docker login -u ${DH_USERNAME} --password $DH_PASS
