@@ -1,9 +1,23 @@
 # B3 Devops - TP 2
 
 ## Info
+Team 6
+---
 mail: guillaume.chateauroux@ynov.com
 
-github _username: ChxGuillaume
+github_username: ChxGuillaume
+
+---
+
+mail: julien.bonnanfant@ynov.com
+
+github_username: julien-bonnanfant
+
+---
+
+## Docker Hub
+
+link: https://hub.docker.com/repository/docker/chxguillaumeynov/project1-team-6
 
 ## How to use
 
