@@ -1,8 +1,11 @@
 # B3 Devops - TP 2
 
 ## Info
-Team 6
+
+### Team 6
+
 ---
+
 mail: guillaume.chateauroux@ynov.com
 
 github_username: ChxGuillaume
